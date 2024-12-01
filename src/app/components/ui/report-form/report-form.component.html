@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>Add Report</h2>
+<form [formGroup]="balanceForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field class="w-100 mb-8" appearance="fill">
+            <mat-label>Transaction name</mat-label>
+            <input matInput type="text" placeholder="Transaction name" formControlName="name">
+            @if (balanceForm.get('name')!.invalid && (balanceForm.get('name')!.dirty || balanceForm.get('name')!.touched)) {
+                <mat-error>Transaction name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="w-100 mb-8" appearance="fill">
+            <mat-label>Amount </mat-label>
+            <input matInput 
+                type="textbox"
+                placeholder="XX.XX" 
+                formControlName="amount"
+                appTwoDigitDecimaNumberDirective>
+                @if (balanceForm.get('amount')!.invalid && (balanceForm.get('amount')!.dirty || balanceForm.get('amount')!.touched)) {
+                    <mat-error>Amount is <strong>required</strong></mat-error>
+                }
+        </mat-form-field>
+        <mat-form-field class="w-100 mb-8">
+            <mat-label>Transaction type</mat-label>
+            <mat-select formControlName="transactionType">
+                <mat-option>--</mat-option>
+                @for (item of TRANSACTION_LIST; track item.value) {
+                    <mat-option [value]="item.value">{{item.name}}</mat-option>
+                }
+            </mat-select>
+            @if (balanceForm.get('transactionType')!.invalid && (balanceForm.get('transactionType')!.dirty || balanceForm.get('transactionType')!.touched)) {
+                <mat-error>Transaction type is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="w-100 mb-8">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option>--</mat-option>
+                @for (item of CATEGORY_LIST; track item.value) {
+                    <mat-option [value]="item.value">{{item.name}}</mat-option>
+                }
+            </mat-select>
+            @if (balanceForm.get('category')!.invalid && (balanceForm.get('category')!.dirty || balanceForm.get('category')!.touched)) {
+                <mat-error>Category is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="w-100 mb-8">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="transactionDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button mat-dialog-close>Cancel</button>
+        <button type="submit" mat-button [mat-dialog-close]="true" [disabled]="balanceForm.invalid">Add</button>
+    </mat-dialog-actions>
+</form>

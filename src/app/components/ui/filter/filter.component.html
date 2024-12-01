@@ -1,0 +1,17 @@
+<form [formGroup]="filterForm">
+    <mat-radio-group formControlName="filterParams" (change)="applyFilter()">
+        <div class="flex-centred">
+            <div class="centred-icon">
+                <mat-icon fontIcon="filter_alt"></mat-icon> Filter
+            </div>
+            @for (item of transformLable(); track item) {
+            <mat-radio-button class="example-radio-button" [value]="item.value">{{
+                item.name
+                }}</mat-radio-button>
+            }
+            <button type="button" mat-icon-button (click)="clearFilter()">
+                <mat-icon>filter_alt_off</mat-icon>
+            </button>
+        </div>
+    </mat-radio-group>
+</form>

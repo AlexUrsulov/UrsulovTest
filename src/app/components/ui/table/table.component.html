@@ -1,0 +1,28 @@
+
+    
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        @for (item of columntTable(); track item.col;) {
+            <ng-container [matColumnDef]="item.name">
+                @if(item.sortable) {
+                    <th mat-header-cell *matHeaderCellDef [mat-sort-header]="item.col">
+                        {{item.name}}
+                    </th>
+                } @else {
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{item.name}}
+                    </th>
+                }
+                @if(PIPE_DATE_COLUMN.includes(item.col)) {
+                    <td mat-cell *matCellDef="let element"> {{element[item.col] | date: 'dd/MM/yyyy'}}</td>
+                } @else {
+                    <td mat-cell *matCellDef="let element"> {{element[item.col]}}</td>
+                }
+                
+            </ng-container>
+        }
+        <tr mat-header-row *matHeaderRowDef="displayColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumn"></tr>
+    </table>
+</div>
+

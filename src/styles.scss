@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    @include mat.radio-overrides((
+      unselected-hover-icon-color: red,
+      label-text-color: black,
+      ripple-color: black,
+      selected-focus-icon-color: orange,
+      unselected-pressed-icon-color: black,
+      unselected-icon-color: black,
+    ));
+}
+
+// usefull class
+.container {
+  width: 80rem;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}

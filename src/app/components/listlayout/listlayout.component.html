@@ -1,0 +1,15 @@
+<h1 class="text-center">Expense Tracker</h1>
+<section class="subheader">
+    <button mat-flat-button (click)="openDialog()">Add report</button>
+    <h2>Total Balance {{ totalBalance }}</h2>
+</section>
+<app-filter 
+    [filterList]="filterList"
+    (filterOption)="filterParams($event)"
+    />
+
+<app-table 
+    [columntTable]="coluumnTable"
+    [tableData]="reportData"
+    [filterTable]="filterOption"
+/>
